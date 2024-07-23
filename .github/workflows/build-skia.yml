@@ -2,7 +2,7 @@ name: Build SKIA
 on: workflow_dispatch
 jobs:
   build:
-    runs-on: macos-latest
+    runs-on: [self-hosted, Tallinn]
     env:
       WORKING_DIRECTORY: ./
     steps:
