@@ -53,21 +53,17 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Shopify/react-native-skia.git",
-    "baseUrl": "https://github.com/Shopify/react-native-skia"
+    "url": "git+https://github.com/021dev/react-native-skia.git",
+    "baseUrl": "https://github.com/021dev/react-native-skia"
   },
   "keywords": [
     "react-native"
   ],
-  "author": "Shopify Inc.",
+  "author": "Pompadour Inc.",
   "contributors": [
     {
-      "name": "Christian Falch",
-      "email": "christian.falch@gmail.com"
-    },
-    {
-      "name": "William Candillon",
-      "email": "wcandillon@gmail.com"
+      "name": "Michel Courtine",
+      "email": "michel@021.dev"
     }
   ],
   "license": "MIT",
