@@ -10,7 +10,7 @@ jobs:
         uses: actions/checkout@v2
         with:
           submodules: recursive
-          token: ${{ secrets.GITHUB_TOKEN }}
+          token: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
 
       - name: Setup Android NDK
         id: setup-ndk
