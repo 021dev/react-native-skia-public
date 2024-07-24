@@ -2,7 +2,7 @@ name: Build SKIA
 on: workflow_dispatch
 jobs:
   build:
-    runs-on: [self-hosted, Tallinn]
+    runs-on: [self-hosted, Tallinn, Skia]
     env:
       WORKING_DIRECTORY: ./
     steps:
