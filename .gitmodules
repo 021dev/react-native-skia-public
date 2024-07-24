@@ -1,6 +1,6 @@
 [submodule "externals/skia"]
 	path = externals/skia
-	url = https://github.com/021dev/skia.git
+  	url = git@github.com:021dev/skia.git
 	branch = neat
 [submodule "externals/depot_tools"]
 	path = externals/depot_tools
