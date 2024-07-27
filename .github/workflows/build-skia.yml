@@ -11,10 +11,26 @@ jobs:
       WORKING_DIRECTORY: ./
     steps:
       - name: checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
         with:
           submodules: recursive
           token: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
+
+      - name: Get current branch
+        id: get-branch
+        run: echo "BRANCH_NAME=$(git rev-parse --abbrev-ref HEAD)" >> $GITHUB_ENV
+
+      - name: Print current branch
+        run: echo "Current branch is ${{ env.BRANCH_NAME }}"
+
+      - name: Get submodule branches
+        run: |
+          git submodule foreach '
+          echo "Submodule path: $sm_path"
+          echo "Submodule branch: $(git rev-parse --abbrev-ref HEAD)"
+
+      - name: Install root node dependencies
+        run: yarn
 
       - name: Setup Android NDK
         id: setup-ndk
