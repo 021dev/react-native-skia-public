@@ -30,6 +30,16 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
 
+      - name: Commit and push submodule update
+        run: |
+          git config --global user.email "ci@021.dev"
+          git config --global user.name "021 CI"
+          git add externals/skia
+          git commit -m "chore(skia): updated to latest version"
+          git push origin HEAD:${{ github.ref }}
+        env:
+          GITHUB_TOKEN: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
+
       - name: Install root node dependencies
         run: yarn
 
