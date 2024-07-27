@@ -1,5 +1,9 @@
 name: Build SKIA
-on: workflow_dispatch
+on: 
+  workflow_dispatch:
+  repository_dispatch:
+    types: [trigger-build-skia]
+
 jobs:
   build:
     runs-on: [self-hosted, Tallinn, Skia]
@@ -104,3 +108,10 @@ jobs:
             ${{ env.WORKING_DIRECTORY }}/package/libs/ios/libsksg.xcframework
             ${{ env.WORKING_DIRECTORY }}/package/libs/ios/libskparagraph.xcframework
             ${{ env.WORKING_DIRECTORY }}/package/libs/ios/libskunicode.xcframework
+
+      - name: Trigger build-npm workflow
+        if: success()
+        uses: peter-evans/repository-dispatch@v2
+        with:
+          token: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
+          event-type: trigger-build-npm
