@@ -53,7 +53,7 @@ jobs:
         run: |
           git config --local user.email "action@github.com"
           git config --local user.name "GitHub Action"
-          git commit --allow-empty -m "build(skia): updated Skia version"
+          git commit --allow-empty -m "chore(skia): updated skia version"
 
       - name: Build NPM Package
         working-directory: package
