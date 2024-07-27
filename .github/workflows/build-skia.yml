@@ -16,6 +16,13 @@ jobs:
           submodules: recursive
           token: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
 
+      - name: Update Skia submodule
+        uses: snickerbockers/submodules-init@v4
+        with:
+          submodule: externals/skia
+          branch: neat
+          update: true
+          
       - name: Install root node dependencies
         run: yarn
 
