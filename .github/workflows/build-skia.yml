@@ -25,10 +25,10 @@ jobs:
 
       - name: Get submodule branches
         run: |
-          git submodule foreach "
-          echo 'Submodule path: \$sm_path'
-          echo 'Submodule branch: \$(git rev-parse --abbrev-ref HEAD)'
-          "
+         git submodule foreach '
+            echo "Submodule path: $sm_path"
+            git -C $sm_path rev-parse --abbrev-ref HEAD
+          '
 
       - name: Install root node dependencies
         run: yarn
