@@ -1,8 +1,11 @@
 name: Create a release
-on: workflow_dispatch
+on: 
+  workflow_dispatch:
+  repository_dispatch:
+    types: [trigger-build-npm]
 jobs:
   build:
-    runs-on: ubuntu-latest
+    runs-on: [self-hosted, Tallinn, Skia]
     env:
       WORKING_DIRECTORY: ./
       INPUT_TOKEN: ${{ secrets.NPM_TOKEN }}
