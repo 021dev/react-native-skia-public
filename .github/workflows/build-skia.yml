@@ -23,7 +23,7 @@ jobs:
       - name: Update skia submodule to latest commit on neat branch
         run: |
           cd externals/skia
-          git remote set-url origin git@github.com:021dev/skia.git
+          git remote set-url origin https://${{ secrets.PERSONAL_ACCESS_TOKEN }}@github.com/021dev/skia.git
           git fetch origin neat --depth=1
           git checkout FETCH_HEAD
           cd ../..
