@@ -28,7 +28,7 @@ jobs:
           git submodule foreach '
           echo "Submodule path: $sm_path"
           echo "Submodule branch: $(git rev-parse --abbrev-ref HEAD)"
-
+          '
       - name: Install root node dependencies
         run: yarn
 
