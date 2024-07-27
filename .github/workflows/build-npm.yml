@@ -8,6 +8,7 @@ jobs:
     runs-on: [self-hosted, Tallinn, Skia]
     env:
       WORKING_DIRECTORY: ./
+      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}:30000
       INPUT_TOKEN: ${{ secrets.NPM_TOKEN }}
     concurrency:
       group: npm-${{ github.ref }}
@@ -60,7 +61,7 @@ jobs:
           yarn build
           npx semantic-release --debug
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}:30000
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
 
       # - name: Install & Build Docs
