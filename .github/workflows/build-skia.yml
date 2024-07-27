@@ -16,16 +16,18 @@ jobs:
           submodules: recursive
           token: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
 
-      - name: Update Skia submodule to latest 'neat' branch
+      - name: Update Skia submodule
         run: |
           git config --global user.email "action@github.com"
           git config --global user.name "GitHub Action"
           cd externals/skia
-          git fetch origin neat
-          git checkout neat
+          git fetch --all
+          # Try to checkout 'neat', fall back to 'main' if it doesn't exist
+          git checkout neat || git checkout main || git checkout master
+          git pull
           cd ../..
           git add externals/skia
-          git commit -m "Update Skia submodule to neat branch" || echo "No changes to commit"
+          git commit -m "Update Skia submodule" || echo "No changes to commit"
 
       - name: Install root node dependencies
         run: yarn
