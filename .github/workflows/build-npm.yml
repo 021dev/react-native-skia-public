@@ -55,7 +55,7 @@ jobs:
           yarn build
           npx semantic-release --debug
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}:30000
+          GITHUB_TOKEN: ${{ secrets.PERSONAL_ACCESS_TOKEN }}:30000
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
 
       # - name: Install & Build Docs
