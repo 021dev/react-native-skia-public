@@ -36,12 +36,17 @@ jobs:
         working-directory: package
         run: yarn
 
-      - name: Download Skia Binary Artifacts
-        uses: dawidd6/action-download-artifact@v2
-        with:
-          workflow: "build-skia.yml"
-          path: artifacts
-          branch: main
+      - name: Copy artifacts from shared storage
+        run: |
+          mkdir -p artifacts
+          cp -R ${{ env.ARTIFACTS_DIR }}/${{ github.sha }}/* artifacts/
+
+      # - name: Download Skia Binary Artifacts
+      #   uses: dawidd6/action-download-artifact@v2
+      #   with:
+      #     workflow: "build-skia.yml"
+      #     path: artifacts
+      #     branch: main
 
       - name: Copy Artifacts to libs folder
         run: yarn workflow-copy-libs
