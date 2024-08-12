@@ -66,75 +66,82 @@ jobs:
           ANDROID_NDK: ${{ steps.setup-ndk.outputs.ndk-path }}
         run: yarn build-skia
 
-      - name: Upload artifacts - Android arm
-        if: github.ref == 'refs/heads/main'
-        uses: actions/upload-artifact@v2
-        with:
-          name: skia-android-arm
-          path: |
-            ${{ env.WORKING_DIRECTORY }}/externals/skia/out/android/arm/libskia.a
-            ${{ env.WORKING_DIRECTORY }}/externals/skia/out/android/arm/libskshaper.a
-            ${{ env.WORKING_DIRECTORY }}/externals/skia/out/android/arm/libsvg.a
-            ${{ env.WORKING_DIRECTORY }}/externals/skia/out/android/arm/libskottie.a
-            ${{ env.WORKING_DIRECTORY }}/externals/skia/out/android/arm/libsksg.a
-            ${{ env.WORKING_DIRECTORY }}/externals/skia/out/android/arm/libskparagraph.a
-            ${{ env.WORKING_DIRECTORY }}/externals/skia/out/android/arm/libskunicode.a
+      - name: Copy artifacts to shared storage
+        run: |
+          echo "Copying artifacts to ${{ vars.ARTIFACTS_DIR }}/${{ github.sha }}"
+          mkdir -p ${{ vars.ARTIFACTS_DIR }}/${{ github.sha }}
+          cp -R ${{ env.WORKING_DIRECTORY }}/externals/skia/out/android ${{ vars.ARTIFACTS_DIR }}/${{ github.sha }}/
+          cp -R ${{ env.WORKING_DIRECTORY }}/package/libs/ios ${{ vars.ARTIFACTS_DIR }}/${{ github.sha }}/
 
-      - name: Upload artifacts - Android arm64
-        if: github.ref == 'refs/heads/main'
-        uses: actions/upload-artifact@v2
-        with:
-          name: skia-android-arm-64
-          path: |
-            ${{ env.WORKING_DIRECTORY }}/externals/skia/out/android/arm64/libskia.a
-            ${{ env.WORKING_DIRECTORY }}/externals/skia/out/android/arm64/libskshaper.a
-            ${{ env.WORKING_DIRECTORY }}/externals/skia/out/android/arm64/libsvg.a
-            ${{ env.WORKING_DIRECTORY }}/externals/skia/out/android/arm64/libskottie.a
-            ${{ env.WORKING_DIRECTORY }}/externals/skia/out/android/arm64/libsksg.a
-            ${{ env.WORKING_DIRECTORY }}/externals/skia/out/android/arm64/libskparagraph.a
-            ${{ env.WORKING_DIRECTORY }}/externals/skia/out/android/arm64/libskunicode.a
+      # - name: Upload artifacts - Android arm
+      #   if: github.ref == 'refs/heads/main'
+      #   uses: actions/upload-artifact@v2
+      #   with:
+      #     name: skia-android-arm
+      #     path: |
+      #       ${{ env.WORKING_DIRECTORY }}/externals/skia/out/android/arm/libskia.a
+      #       ${{ env.WORKING_DIRECTORY }}/externals/skia/out/android/arm/libskshaper.a
+      #       ${{ env.WORKING_DIRECTORY }}/externals/skia/out/android/arm/libsvg.a
+      #       ${{ env.WORKING_DIRECTORY }}/externals/skia/out/android/arm/libskottie.a
+      #       ${{ env.WORKING_DIRECTORY }}/externals/skia/out/android/arm/libsksg.a
+      #       ${{ env.WORKING_DIRECTORY }}/externals/skia/out/android/arm/libskparagraph.a
+      #       ${{ env.WORKING_DIRECTORY }}/externals/skia/out/android/arm/libskunicode.a
 
-      - name: Upload artifacts - Android x86
-        if: github.ref == 'refs/heads/main'
-        uses: actions/upload-artifact@v2
-        with:
-          name: skia-android-arm-x86
-          path: |
-            ${{ env.WORKING_DIRECTORY }}/externals/skia/out/android/x86/libskia.a
-            ${{ env.WORKING_DIRECTORY }}/externals/skia/out/android/x86/libskshaper.a
-            ${{ env.WORKING_DIRECTORY }}/externals/skia/out/android/x86/libsvg.a
-            ${{ env.WORKING_DIRECTORY }}/externals/skia/out/android/x86/libskottie.a
-            ${{ env.WORKING_DIRECTORY }}/externals/skia/out/android/x86/libsksg.a
-            ${{ env.WORKING_DIRECTORY }}/externals/skia/out/android/x86/libskparagraph.a
-            ${{ env.WORKING_DIRECTORY }}/externals/skia/out/android/x86/libskunicode.a
+      # - name: Upload artifacts - Android arm64
+      #   if: github.ref == 'refs/heads/main'
+      #   uses: actions/upload-artifact@v2
+      #   with:
+      #     name: skia-android-arm-64
+      #     path: |
+      #       ${{ env.WORKING_DIRECTORY }}/externals/skia/out/android/arm64/libskia.a
+      #       ${{ env.WORKING_DIRECTORY }}/externals/skia/out/android/arm64/libskshaper.a
+      #       ${{ env.WORKING_DIRECTORY }}/externals/skia/out/android/arm64/libsvg.a
+      #       ${{ env.WORKING_DIRECTORY }}/externals/skia/out/android/arm64/libskottie.a
+      #       ${{ env.WORKING_DIRECTORY }}/externals/skia/out/android/arm64/libsksg.a
+      #       ${{ env.WORKING_DIRECTORY }}/externals/skia/out/android/arm64/libskparagraph.a
+      #       ${{ env.WORKING_DIRECTORY }}/externals/skia/out/android/arm64/libskunicode.a
 
-      - name: Upload artifacts - Android x64
-        if: github.ref == 'refs/heads/main'
-        uses: actions/upload-artifact@v2
-        with:
-          name: skia-android-arm-x64
-          path: |
-            ${{ env.WORKING_DIRECTORY }}/externals/skia/out/android/x64/libskia.a
-            ${{ env.WORKING_DIRECTORY }}/externals/skia/out/android/x64/libskshaper.a
-            ${{ env.WORKING_DIRECTORY }}/externals/skia/out/android/x64/libsvg.a
-            ${{ env.WORKING_DIRECTORY }}/externals/skia/out/android/x64/libskottie.a
-            ${{ env.WORKING_DIRECTORY }}/externals/skia/out/android/x64/libsksg.a
-            ${{ env.WORKING_DIRECTORY }}/externals/skia/out/android/x64/libskparagraph.a
-            ${{ env.WORKING_DIRECTORY }}/externals/skia/out/android/x64/libskunicode.a
+      # - name: Upload artifacts - Android x86
+      #   if: github.ref == 'refs/heads/main'
+      #   uses: actions/upload-artifact@v2
+      #   with:
+      #     name: skia-android-arm-x86
+      #     path: |
+      #       ${{ env.WORKING_DIRECTORY }}/externals/skia/out/android/x86/libskia.a
+      #       ${{ env.WORKING_DIRECTORY }}/externals/skia/out/android/x86/libskshaper.a
+      #       ${{ env.WORKING_DIRECTORY }}/externals/skia/out/android/x86/libsvg.a
+      #       ${{ env.WORKING_DIRECTORY }}/externals/skia/out/android/x86/libskottie.a
+      #       ${{ env.WORKING_DIRECTORY }}/externals/skia/out/android/x86/libsksg.a
+      #       ${{ env.WORKING_DIRECTORY }}/externals/skia/out/android/x86/libskparagraph.a
+      #       ${{ env.WORKING_DIRECTORY }}/externals/skia/out/android/x86/libskunicode.a
 
-      - name: Upload artifacts - iOS xcframeworks
-        if: github.ref == 'refs/heads/main'
-        uses: actions/upload-artifact@v2
-        with:
-          name: skia-ios-xcframeworks
-          path: |
-            ${{ env.WORKING_DIRECTORY }}/package/libs/ios/libskia.xcframework
-            ${{ env.WORKING_DIRECTORY }}/package/libs/ios/libskshaper.xcframework
-            ${{ env.WORKING_DIRECTORY }}/package/libs/ios/libsvg.xcframework
-            ${{ env.WORKING_DIRECTORY }}/package/libs/ios/libskottie.xcframework
-            ${{ env.WORKING_DIRECTORY }}/package/libs/ios/libsksg.xcframework
-            ${{ env.WORKING_DIRECTORY }}/package/libs/ios/libskparagraph.xcframework
-            ${{ env.WORKING_DIRECTORY }}/package/libs/ios/libskunicode.xcframework
+      # - name: Upload artifacts - Android x64
+      #   if: github.ref == 'refs/heads/main'
+      #   uses: actions/upload-artifact@v2
+      #   with:
+      #     name: skia-android-arm-x64
+      #     path: |
+      #       ${{ env.WORKING_DIRECTORY }}/externals/skia/out/android/x64/libskia.a
+      #       ${{ env.WORKING_DIRECTORY }}/externals/skia/out/android/x64/libskshaper.a
+      #       ${{ env.WORKING_DIRECTORY }}/externals/skia/out/android/x64/libsvg.a
+      #       ${{ env.WORKING_DIRECTORY }}/externals/skia/out/android/x64/libskottie.a
+      #       ${{ env.WORKING_DIRECTORY }}/externals/skia/out/android/x64/libsksg.a
+      #       ${{ env.WORKING_DIRECTORY }}/externals/skia/out/android/x64/libskparagraph.a
+      #       ${{ env.WORKING_DIRECTORY }}/externals/skia/out/android/x64/libskunicode.a
+
+      # - name: Upload artifacts - iOS xcframeworks
+      #   if: github.ref == 'refs/heads/main'
+      #   uses: actions/upload-artifact@v2
+      #   with:
+      #     name: skia-ios-xcframeworks
+      #     path: |
+      #       ${{ env.WORKING_DIRECTORY }}/package/libs/ios/libskia.xcframework
+      #       ${{ env.WORKING_DIRECTORY }}/package/libs/ios/libskshaper.xcframework
+      #       ${{ env.WORKING_DIRECTORY }}/package/libs/ios/libsvg.xcframework
+      #       ${{ env.WORKING_DIRECTORY }}/package/libs/ios/libskottie.xcframework
+      #       ${{ env.WORKING_DIRECTORY }}/package/libs/ios/libsksg.xcframework
+      #       ${{ env.WORKING_DIRECTORY }}/package/libs/ios/libskparagraph.xcframework
+      #       ${{ env.WORKING_DIRECTORY }}/package/libs/ios/libskunicode.xcframework
 
       - name: Trigger build-npm workflow
         if: success()
